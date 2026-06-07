@@ -27,3 +27,6 @@ venv/
 # IDE
 .vscode/
 .idea/
+
+# Other
+lab-key.pem
