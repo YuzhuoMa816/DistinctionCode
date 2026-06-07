@@ -1,0 +1,10 @@
+image: docker:20.10.16
+
+pipelines:
+  default:
+    - step:
+        name: Build and Run Docker Image
+        services: [docker]
+        script:
+          - docker build -t week2_lab_docker_image:0.0.1 -f Dockerfile.week2_2.lab .
+          - docker run --rm week2_lab_docker_image:0.0.1
