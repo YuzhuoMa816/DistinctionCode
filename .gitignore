@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+
+# Logs
+*.log
+logs/
+*.gz
+
+# Environment files
+.env
+
+# Temporary files
+*.tmp
+*.swp
+
+# Node / frontend if needed
+node_modules/
+dist/
+build/
+
+# Python if needed
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
