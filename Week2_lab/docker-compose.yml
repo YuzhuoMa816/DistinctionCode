@@ -1,0 +1,40 @@
+services:
+  web:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: my-python-web
+    ports:
+      - "8081:5000"
+
+    depends_on:
+      - db
+
+    networks:
+      - frontend
+
+    environment:
+      DB_HOST: db
+      MYSQL_USER: devopsuser
+      MYSQL_PASSWORD: devopspassword
+      DB_NAME: testdb
+      DB_PORT: 3306
+
+  db:
+    image: mysql:8.0
+    container_name: my-mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: devopsuser
+      MYSQL_PASSWORD: devopspassword
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    driver: bridge
+volumes:
+  mysql_data:
