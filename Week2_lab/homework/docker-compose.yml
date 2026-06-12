@@ -1,0 +1,36 @@
+services:
+  api:
+    image: devops-api:v1
+    env_file:
+      - .env
+    volumes:
+      - app-logs:/var/log
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+    networks:
+      - frontend
+      - backend
+
+  nginx:
+    image: nginx:1.25-alpine
+    ports:
+      - "80:80"
+    networks:
+      - frontend
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+    internal: true # no outbound internet access
+
+volumes:
+  app-logs:
